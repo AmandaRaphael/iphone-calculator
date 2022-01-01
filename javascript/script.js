@@ -86,15 +86,15 @@ squareRoot.addEventListener("click", function () {
   let squareRootValue = 0;
   if (squareRootValue === 0) {
     squareRootValue = Math.sqrt(eval(clicked)).toFixed(2);
-    value = squareRootValue;
+    result = squareRootValue;
     clicked = ``;
   }
   if (squareRootValue !== 0 && !operandSymbols.includes(clicked)) {
-    value = Math.sqrt(eval(squareRootValue)).toFixed(2);
+    result = Math.sqrt(eval(squareRootValue)).toFixed(2);
   } else {
     squareRootValue = Math.sqrt(eval(clicked)).toFixed(2);
   }
-  clicked = value;
+  clicked = result;
   display.textContent = clicked;
 });
 //del
