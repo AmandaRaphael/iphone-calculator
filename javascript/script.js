@@ -15,15 +15,22 @@ const percent = document.querySelector(".percent");
 const equal = document.querySelector(".equal");
 
 const decimal = document.querySelector(".decimal");
+
 const number = document.querySelectorAll(".number");
+
 const operator = document.querySelectorAll(".operator");
+
+const del = document.querySelector(".del");
+
 let clicked = ``;
 let result = 0;
+let decimalCount = 0;
 const operandSymbols = `+*/-`;
 function displayClicked(e) {
   clicked += e.target.textContent;
   display.textContent = clicked;
 }
+//numbers
 number.forEach((num) => {
   num.addEventListener("click", function (e) {
     if (result !== 0) {
@@ -33,37 +40,48 @@ number.forEach((num) => {
     displayClicked(e);
   });
 });
-
+//operator
 operator.forEach((operatorElement) => {
   operatorElement.addEventListener("click", function (e) {
+    decimalCount = 0;
     result = 0;
     displayClicked(e);
   });
 });
+//decimal
 decimal.addEventListener("click", function () {
-  if (clicked[0] == 0) {
+  
+  if (clicked[clicked.length - 1] == 0) {
     clicked = 0 + `.`;
     display.textContent = clicked;
-  } else if (clicked[0] !== 0 || operandSymbols.includes(clicked)) {
+    decimalCount += 1;
+  }
+  if (decimalCount === 0) {
     clicked += `.`;
     display.textContent = clicked;
+      decimalCount += 1;
   }
+ 
 });
+//equal
 equal.addEventListener("click", function () {
+
   result = eval(clicked);
   clicked = result;
   display.textContent = clicked;
 });
-
+//ac
 ac.addEventListener("click", function () {
   clicked = ``;
   display.textContent = 0;
 });
+//percent
 percent.addEventListener("click", function () {
-  value = eval(clicked) / 100;
-  clicked = value.toFixed(4);
+  result = eval(clicked) / 100;
+  clicked = result.toFixed(4);
   display.textContent = clicked;
 });
+//squareRoot
 squareRoot.addEventListener("click", function () {
   let squareRootValue = 0;
   if (squareRootValue === 0) {
@@ -79,3 +97,8 @@ squareRoot.addEventListener("click", function () {
   clicked = value;
   display.textContent = clicked;
 });
+//del
+del.addEventListener("click", function () {
+  clicked = clicked.slice(0, -1);
+  display.textContent = clicked;
+})
